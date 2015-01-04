@@ -2,10 +2,13 @@ __author__ = 'luocheng'
 from collections import defaultdict
 import sqlite3
 import math
+from scipy.stats.stats import pearsonr
+from scipy.stats.stats import kendalltau
+
 def loadValidUsers():
     u = set()
-    for l in open('../data/validusers.txt'):
-        u.add(l.strip())
+    for l in open('../data/validusers.txt').readlines():
+        u.add(int(l.strip()))
     return u
 def mean(lt):
     sum = 0.0
@@ -38,11 +41,16 @@ while True:
         break
     else:
         id = logpiece[0]
-        studentID = logpiece[1]
+        studentID = int(logpiece[1])
         task_id = logpiece[2]
         query = logpiece[3]
-        score = logpiece[4]
-        querysatis[studentID][task_id].append(score)
+        score = int(logpiece[4])
+        if studentID in validUsers:
+            querysatis[studentID][task_id].append(score)
+            print studentID,task_id,score
+
+        else:
+            print 'invalid studentID',studentID
 
 cu.execute('select * from anno_sessionannotation')
 while True:
@@ -51,21 +59,100 @@ while True:
         break
     else:
         id = logpiece[0]
-        studentID = logpiece[1]
+        studentID = int(logpiece[1])
         task_id = logpiece[2]
-        score = logpiece[3]
-        querysatis[studentID][task_id]=score
-def sCG(lt):
-    return sum(formalize(lt))
+        score = int(logpiece[3])
+        if studentID in validUsers:
+            sessionsatis[studentID][task_id]=score
+            print studentID,task_id,score
+        else:
+            print 'invalid studentID',studentID
+
+def personSpecific(sid):
+    queryseq = list()
+    sessionseq = list()
+    for tid in querysatis[sid]:
+        for item in querysatis[sid][tid]:
+            queryseq.append(item)
+
+    for tid in sessionsatis[sid]:
+        sessionseq.append(sessionsatis[sid][tid])
+    return mean(queryseq),variance(queryseq),mean(sessionseq),variance(sessionseq)
+
+user_parameters = dict()
+for sid in validUsers:
+    user_parameters[sid] =  personSpecific(sid)
+
+
+sCGseq = list()
+sDCGseq = list()
+nsDCGseq = list()
+sSatisseq = list()
+numOfQueryseq = list()
+
+def sCG(lt ):
+    return sum(lt)
+
+def DCG(lt):
+    sum = 0.0
+    for i in range(0,len(lt),1):
+        sum += (2**lt[i]-1)/(math.log(i+2)/math.log(2))
+    return sum
 
 def sDCG(lt,bq):
     #sDCG(q) = (1 + logbq q)-1 * DCG
     sum = 0.0
+    for i in range(0,len(lt),1):
+        sum += (1+math.log(i+1)/math.log(bq))**(-1)*DCG(lt[0:i+1])
+    return sum
+
+
+for sid in querysatis.keys():
+    for tid in querysatis[sid].keys():
+        #formalize
+        formalized_query = list()
+        for item in querysatis[sid][tid]:
+            formalized_query.append((float(item) - user_parameters[sid][0])/user_parameters[sid][1])
+        formalized_session = (sessionsatis[sid][tid] - user_parameters[sid][2])/user_parameters[sid][3]
+
+        numOfQueryseq.append(len(querysatis[sid][tid]))
+
+
+        sCGseq.append(sCG(formalized_query))
+
+        sDCGseq.append(sDCG(formalized_query,4))
+        sSatisseq.append(formalized_session)
+
+
+sCGchuNumOfQueriesseq = list()
+for i in range(0,len(sCGseq),1):
+    sCGchuNumOfQueriesseq.append(sCGseq[i]/numOfQueryseq[i])
 
 
 
+print '\n\n'
+print 'correlation between sCG and session Satisfaction'
+print pearsonr(sCGseq,sSatisseq)
+print kendalltau(sCGseq,sSatisseq)
+
+print 'correlation between #queries and session Satisfaction'
+
+print pearsonr(numOfQueryseq,sSatisseq)
+print kendalltau(numOfQueryseq,sSatisseq)
+
+print 'correlation between sCG/#queries and session Satisfaction'
+print pearsonr(sCGchuNumOfQueriesseq,sSatisseq)
+print kendalltau(sCGchuNumOfQueriesseq,sSatisseq)
 
 
+print 'correlation between sDCG and session Satisfaction'
+print pearsonr(sDCGseq,sSatisseq)
+print kendalltau(sDCGseq,sSatisseq)
+
+
+# print 'correlation between nsDCG and session Satisfaction'
+# print pearsonr(nsDCGseq,sSatisseq)
+# print kendalltau(nsDCGseq,sSatisseq)
 
 
 
