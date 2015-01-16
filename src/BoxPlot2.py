@@ -34,7 +34,7 @@ def getMeanAndStddev(lt):
 
 # querysatis [student id][task id] -> score list
 # sessionsatis[ student id][task id] -> session satisfaction score
-querysatis = defaultdict(lambda:defaultdict(lambda:list()))
+querysatis  = defaultdict(lambda:defaultdict(lambda:list()))
 sessionsatis = defaultdict(lambda:defaultdict(lambda:1))
 
 validUsers = loadValidUsers()

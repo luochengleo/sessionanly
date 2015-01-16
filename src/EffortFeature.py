@@ -115,9 +115,11 @@ def extractFixation():
                 k,v = k.split('=')
                 d[k] = v
             bond[d['query']][int(d['page'])] = [int(d['top']),int(d['bottom']),int(d['left']),int(d['right'])]
-        
-
+    # sid | tid |
+    querieseq = defaultdict(lambda:defaultdict(lambda:defaultdict(lambda:dict())))
+    
 extractSessionDwellTime()
 extractQueryDwellTime()
 extractSessionClicks()
 extractQueryClicks()
+extractFixation()
