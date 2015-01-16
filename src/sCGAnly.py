@@ -1,6 +1,7 @@
 __author__ = 'luocheng'
 from collections import defaultdict
 import sqlite3
+from operator import div
 import math
 from scipy.stats.stats import pearsonr
 from scipy.stats.stats import kendalltau
@@ -74,7 +75,6 @@ def personSpecific(sid):
     for tid in querysatis[sid]:
         for item in querysatis[sid][tid]:
             queryseq.append(item)
-
     for tid in sessionsatis[sid]:
         sessionseq.append(sessionsatis[sid][tid])
     return mean(queryseq),variance(queryseq),mean(sessionseq),variance(sessionseq)
@@ -105,6 +105,11 @@ def sDCG(lt,bq):
     for i in range(0,len(lt),1):
         sum += (1+math.log(i+1)/math.log(bq))**(-1)*DCG(lt[0:i+1])
     return sum
+def dcg( r ):
+    from math import log
+    return reduce(lambda dcgs, dg: dcgs + [dg+dcgs[-1]],map(lambda (rank, g): (2**g-1) / log( rank+2, 2), enumerate( r ) ), [0])[1:]
+def ndcg( r ):
+  return map(div, dcg(r), dcg(sorted(r, reverse=True)))
 
 
 for sid in querysatis.keys():
@@ -119,7 +124,7 @@ for sid in querysatis.keys():
 
 
         sCGseq.append(sCG(formalized_query))
-
+        nsDCGseq.append(dcg(formalized_query)[-1])
         sDCGseq.append(sDCG(formalized_query,4))
         sSatisseq.append(formalized_session)
 
@@ -150,9 +155,10 @@ print pearsonr(sDCGseq,sSatisseq)
 print kendalltau(sDCGseq,sSatisseq)
 
 
-# print 'correlation between nsDCG and session Satisfaction'
-# print pearsonr(nsDCGseq,sSatisseq)
-# print kendalltau(nsDCGseq,sSatisseq)
+print ndcg([1,2,3,4,5,6])[-1]
 
-
+print 'correlation between nsDCG and session Satisfaction'
+print nsDCGseq
+print pearsonr(nsDCGseq,sSatisseq)
+print kendalltau(nsDCGseq,sSatisseq)
 
