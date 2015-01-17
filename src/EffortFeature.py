@@ -117,7 +117,37 @@ def extractFixation():
             bond[d['query']][int(d['page'])] = [int(d['top']),int(d['bottom']),int(d['left']),int(d['right'])]
     # sid | tid |
     querieseq = defaultdict(lambda:defaultdict(lambda:defaultdict(lambda:dict())))
-    
+    for l in LOGLIST:
+        _sid = l.studentid
+        _tid = l.taskid
+        _query = l.query
+        if len(querieseq[_sid][_tid].keys()) == 0:
+            querieseq[_sid][_tid][1] = _query
+        else:
+            if _query == querieseq[_sid][_tid][max(querieseq[_sid][_tid].keys())]:
+                pass
+            else:
+                querieseq[_sid][_tid][max(querieseq[_sid][_tid].keys())+1] = _query
+    for sid in validusers:
+        for l in open('../data/mouse_and_eye_new/processed_'+str(sid)).readlines()[1:]:
+            segs = l.strip().split('\t')
+            _sid = int(segs[0])
+            _tid = int(segs[1])
+            _query = segs[2]
+            _pid = int(segs[3])
+            _qidx = int(segs[4])
+            _type = segs[5]
+            _timestamp = int(segs[6])
+            _content = segs[7]
+
+            if _type == 'eye':
+                _contentdict = dict()
+                for item in _content:
+                    k,v = item.strip().split('=')
+                    _contentdict[k] = v
+                x_page = _contentdict['x_on_page']
+                y_page = _contentdict['y_on_page']
+
 extractSessionDwellTime()
 extractQueryDwellTime()
 extractSessionClicks()

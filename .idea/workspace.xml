@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a2fbf277-24c5-4d35-aa46-ed792c081da9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BoxPlot2.py" afterPath="$PROJECT_DIR$/src/BoxPlot2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EffortFeature.py" afterPath="$PROJECT_DIR$/src/EffortFeature.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="sessionanly.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,7 +21,7 @@
     <SUITE FILE_PATH="coverage/sessionanly$BoxPlot2.coverage" NAME="BoxPlot2 Coverage Results" MODIFIED="1421309204877" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/sessionanly$sCGAnly.coverage" NAME="sCGAnly Coverage Results" MODIFIED="1420768869858" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/sessionanly$BoxPlot.coverage" NAME="BoxPlot Coverage Results" MODIFIED="1421053021555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/sessionanly$EffortFeature.coverage" NAME="EffortFeature Coverage Results" MODIFIED="1421333750634" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/sessionanly$EffortFeature.coverage" NAME="EffortFeature Coverage Results" MODIFIED="1421500649427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/sessionanly$test.coverage" NAME="test Coverage Results" MODIFIED="1420206145206" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -78,7 +73,7 @@
           <file leaf-file-name="EffortFeature.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/EffortFeature.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="1935">
+                <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="2385">
                   <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
                   <folding />
                 </state>
@@ -88,7 +83,7 @@
           <file leaf-file-name="BoxPlot2.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/BoxPlot2.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.2173913" vertical-offset="360" max-vertical-offset="2115">
+                <state vertical-scroll-proportion="0.49586776" vertical-offset="360" max-vertical-offset="2115">
                   <caret line="36" column="12" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
                   <folding>
                     <element signature="e#37#55#0" expanded="true" />
@@ -166,10 +161,10 @@
           <file leaf-file-name="EffortFeature.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/EffortFeature.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.8369565" vertical-offset="1077" max-vertical-offset="1935">
-                  <caret line="119" column="4" selection-start-line="119" selection-start-column="4" selection-end-line="119" selection-end-column="4" />
+                <state vertical-scroll-proportion="0.91735536" vertical-offset="1872" max-vertical-offset="2385">
+                  <caret line="148" column="48" selection-start-line="148" selection-start-column="48" selection-end-line="148" selection-end-column="48" />
                   <folding>
-                    <marker date="1421410507000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
+                    <marker date="1421502497000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
                   </folding>
                 </state>
               </provider>
@@ -201,7 +196,7 @@
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="938" />
+    <option name="height" value="473" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -590,7 +585,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="938" extended-state="0" />
+    <frame x="0" y="23" width="1280" height="473" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3301282" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -605,7 +600,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16397415" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31699848" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3164557" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -736,7 +731,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="1905">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding>
-            <marker date="1421410507000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
+            <marker date="1421502497000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
           </folding>
         </state>
       </provider>
@@ -1059,7 +1054,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/BoxPlot2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2173913" vertical-offset="360" max-vertical-offset="2115">
+        <state vertical-scroll-proportion="0.49586776" vertical-offset="360" max-vertical-offset="2115">
           <caret line="36" column="12" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
           <folding>
             <element signature="e#37#55#0" expanded="true" />
@@ -1071,10 +1066,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/EffortFeature.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8369565" vertical-offset="1077" max-vertical-offset="1935">
-          <caret line="119" column="4" selection-start-line="119" selection-start-column="4" selection-end-line="119" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.91735536" vertical-offset="1872" max-vertical-offset="2385">
+          <caret line="148" column="48" selection-start-line="148" selection-start-column="48" selection-end-line="148" selection-end-column="48" />
           <folding>
-            <marker date="1421410507000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
+            <marker date="1421502497000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
           </folding>
         </state>
       </provider>
