@@ -104,18 +104,19 @@ def extractQueryClicks():
     fout.close()
 
 def extractFixation():
-    # boundary
-    bond = defaultdict(lambda:defaultdict(lambda:[0.0,0.0,0.0,0.0]))
+    # boundary query, page, list
+    bond = defaultdict(lambda:defaultdict(lambda:list()))
 
     for l in open('../data/mouse_and_eye_new/result_pos.txt').readlines():
         d = dict()
         segs =l.strip().split('\t')
         if len(segs) >1:
             for s in segs:
-                k,v = k.split('=')
-                d[k] = v
-            bond[d['query']][int(d['page'])] = [int(d['top']),int(d['bottom']),int(d['left']),int(d['right'])]
+                _k,_v = s.split('=')
+                d[_k] = _v
+            bond[d['query']][int(d['page'])].append([int(d['top']),int(d['bottom']),int(d['left']),int(d['right'])])
     # sid | tid |
+
     querieseq = defaultdict(lambda:defaultdict(lambda:defaultdict(lambda:dict())))
     for l in LOGLIST:
         _sid = l.studentid
@@ -128,6 +129,8 @@ def extractFixation():
                 pass
             else:
                 querieseq[_sid][_tid][max(querieseq[_sid][_tid].keys())+1] = _query
+    fout = open('../data/fixitionOnResult.feature.temp','w')
+    fout.write('studentid\ttaskid\tquery\tpageid\tqueryidx\ttype\tfixation_idx\tduration\tx_page\ty_page\tresult_idx\ttop\tbottom\tleft\tright\n')
     for sid in validusers:
         for l in open('../data/mouse_and_eye_new/processed_'+str(sid)).readlines()[1:]:
             segs = l.strip().split('\t')
@@ -138,18 +141,32 @@ def extractFixation():
             _qidx = int(segs[4])
             _type = segs[5]
             _timestamp = int(segs[6])
-            _content = segs[7]
+            _content = segs[7:]
 
             if _type == 'eye':
                 _contentdict = dict()
                 for item in _content:
+                    # print l
+                    # print _content
                     k,v = item.strip().split('=')
                     _contentdict[k] = v
-                x_page = _contentdict['x_on_page']
-                y_page = _contentdict['y_on_page']
+                x_page = int(_contentdict['x_on_page'])
+                y_page = int(_contentdict['y_on_page'])
+                duration = int(_contentdict['fixation_duration'])
+                f_idx = int(_contentdict['fixation_idx'])
+                count = 0
+                # print len(bond[_query][_pid])
+                # print bond[_query][_pid]
+                for r in bond[_query][_pid][0:10]:
+                    count +=1
+                    if  r[2] <= x_page <= r[3] and r[0] <= y_page <= r[1]:
 
-extractSessionDwellTime()
-extractQueryDwellTime()
-extractSessionClicks()
-extractQueryClicks()
+                        fout.write('\t'.join([str(item) for item in [_sid,_tid,_query,_pid,_qidx,_type,f_idx,duration,x_page,y_page,count,r[0],r[1],r[2],r[3]]]  )+'\n')
+
+
+
+# extractSessionDwellTime()
+# extractQueryDwellTime()
+# extractSessionClicks()
+# extractQueryClicks()
 extractFixation()
