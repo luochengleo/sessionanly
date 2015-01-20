@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a2fbf277-24c5-4d35-aa46-ed792c081da9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EffortFeature.py" afterPath="$PROJECT_DIR$/src/EffortFeature.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="sessionanly.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,6 +49,24 @@
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
     </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DbRootNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="SQLite -" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="anno_log" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -75,10 +91,10 @@
           <file leaf-file-name="EffortFeature.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/EffortFeature.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="2640">
+                <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="2730">
                   <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
                   <folding>
-                    <marker date="1421725749000" expanded="true" signature="3432:5400" placeholder="..." />
+                    <marker date="1421762658000" expanded="true" signature="3432:5400" placeholder="..." />
                   </folding>
                 </state>
               </provider>
@@ -162,14 +178,32 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="EffortFeature.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="EffortFeature.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/EffortFeature.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.72545755" vertical-offset="1529" max-vertical-offset="2640">
-                  <caret line="132" column="50" selection-start-line="132" selection-start-column="50" selection-end-line="132" selection-end-column="50" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2730">
+                  <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
                   <folding>
-                    <marker date="1421725749000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
+                    <marker date="1421762658000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="anno_log" pinned="false" current-in-tab="true">
+            <entry file="dbDummy://dbtable:/8273c70f/01b1152d-1922-4d28-b6ac-2812d46c4bad/..anno_log">
+              <provider editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+              <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+                <state>
+                  <filtering enabled="true">
+                    <filter text="action='CLICK'" />
+                    <filter text="action=click" />
+                  </filtering>
                 </state>
               </provider>
             </entry>
@@ -545,7 +579,7 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3301282" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934782" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.092708334" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12708333" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -616,14 +650,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="705">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="345">
@@ -669,7 +695,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="2385">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding>
-            <marker date="1421725749000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
+            <marker date="1421762658000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
           </folding>
         </state>
       </provider>
@@ -739,7 +765,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="1905">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding>
-            <marker date="1421725749000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
+            <marker date="1421762658000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
           </folding>
         </state>
       </provider>
@@ -1027,11 +1053,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/EffortFeature.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.72545755" vertical-offset="1529" max-vertical-offset="2640">
-          <caret line="132" column="50" selection-start-line="132" selection-start-column="50" selection-end-line="132" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2730">
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
           <folding>
-            <marker date="1421725749000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
+            <marker date="1421762658000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/8273c70f/01b1152d-1922-4d28-b6ac-2812d46c4bad/..anno_log">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true">
+            <filter text="action='CLICK'" />
+            <filter text="action=click" />
+          </filtering>
         </state>
       </provider>
     </entry>

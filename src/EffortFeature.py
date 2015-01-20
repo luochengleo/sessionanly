@@ -165,6 +165,12 @@ def extractFixation():
 
 
 
+def extractQueryDwellTime():
+    pass
+def extractPageDwellTime():
+    pass
+
+
 # extractSessionDwellTime()
 # extractQueryDwellTime()
 # extractSessionClicks()
