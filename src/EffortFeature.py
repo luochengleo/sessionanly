@@ -163,11 +163,29 @@ def extractFixation():
 
                         fout.write('\t'.join([str(item) for item in [_sid,_tid,_query,_pid,_qidx,_type,f_idx,duration,x_page,y_page,count,r[0],r[1],r[2],r[3]]]  )+'\n')
 
+def content2dict(s):
+    d = dict()
+    for seg in s.split('\t'):
+        kvs = seg.split('=')
+        if len(kvs) ==2:
+            d[kvs[0]] = kvs[1]
+        else:
+            d[kvs[0]] = ''
+
+    return d
+
+def extractPageDwellTime():
+    for l in LOGLIST:
+        if l.action=='CLICK':
+            d = content2dict(l.content)
+            
+            #TIME=41906	USER=2014013436	TASK=1	QUERY=破冰游戏	ACTION=CLICK	INFO:	type=anchor	result=rb_0	page=1	rank=0	src=http://www.bdstar.org/Article/ShowArticle.asp?ArticleID=3927
+
+
 
 
 def extractQueryDwellTime():
-    pass
-def extractPageDwellTime():
+
     pass
 
 
