@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a2fbf277-24c5-4d35-aa46-ed792c081da9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EffortFeature.py" afterPath="$PROJECT_DIR$/src/EffortFeature.py" />
-    </list>
+    <list default="true" id="a2fbf277-24c5-4d35-aa46-ed792c081da9" name="Default" comment="" />
     <ignored path="sessionanly.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -94,7 +92,7 @@
                 <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="3000">
                   <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
                   <folding>
-                    <marker date="1421763560000" expanded="true" signature="3432:5400" placeholder="..." />
+                    <marker date="1421833725000" expanded="true" signature="3432:5400" placeholder="..." />
                   </folding>
                 </state>
               </provider>
@@ -181,10 +179,10 @@
           <file leaf-file-name="EffortFeature.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/EffortFeature.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.9500832" vertical-offset="2114" max-vertical-offset="3000">
+                <state vertical-scroll-proportion="0.47587353" vertical-offset="2399" max-vertical-offset="3000">
                   <caret line="180" column="12" selection-start-line="180" selection-start-column="12" selection-end-line="180" selection-end-column="12" />
                   <folding>
-                    <marker date="1421763560000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
+                    <marker date="1421833725000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
                   </folding>
                 </state>
               </provider>
@@ -695,7 +693,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="2385">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding>
-            <marker date="1421763560000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
+            <marker date="1421833725000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
           </folding>
         </state>
       </provider>
@@ -765,7 +763,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="1905">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding>
-            <marker date="1421763560000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
+            <marker date="1421833725000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
           </folding>
         </state>
       </provider>
@@ -1069,10 +1067,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/EffortFeature.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9500832" vertical-offset="2114" max-vertical-offset="3000">
+        <state vertical-scroll-proportion="0.47587353" vertical-offset="2399" max-vertical-offset="3000">
           <caret line="180" column="12" selection-start-line="180" selection-start-column="12" selection-end-line="180" selection-end-column="12" />
           <folding>
-            <marker date="1421763560000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
+            <marker date="1421833725000" expanded="true" signature="456:478" placeholder="select * fro..anno_log..." />
           </folding>
         </state>
       </provider>
