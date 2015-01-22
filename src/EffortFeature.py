@@ -176,21 +176,33 @@ def content2dict(s):
 
 
 def extractResultDwellTime():
-    for idx in len(0,len(LOGLIST),1):
+
+    fout = open('../data/resultDwellTime.feature','w')
+
+    for idx in range(0,len(LOGLIST),1):
         l  = LOGLIST[idx]
         if l.action=='CLICK':
             d = content2dict(l.content)
-            t0 = d['TIME']
+            t0 = int(d['TIME'])
             sid = l.studentid
             tid = l.taskid
             q = l.query
-            
-            for offset in range(0,5,1):
+            r  =d['result']
+            p = d['page']
+            rk = d['rank']
+            src = d['src']
+
+
+            for offset in range(1,5,1):
                 if idx + offset >len(LOGLIST):
                     break
                 else:
                     if LOGLIST[idx+offset].action != 'JUMP_OUT' or LOGLIST[idx+offset] =='JUMP_IN':
-                        t1 = content2dict(LOGLIST[idx+offset].content)['TIME']
+                        t1 = int(content2dict(LOGLIST[idx+offset].content)['TIME'])
+                        fout.write('\t'.join([item for item in[str(sid),str(tid),q.encode('utf8'),r.encode('utf8'),p.encode('utf8'),rk.encode('utf8'),src.encode('utf8'),str(t1-t0)] ])+'\n')
+                        break
+    fout.close()
+
 
             #TIME=41906	USER=2014013436	TASK=1	QUERY=破冰游戏	ACTION=CLICK	INFO:	type=anchor	result=rb_0	page=1	rank=0	src=http://www.bdstar.org/Article/ShowArticle.asp?ArticleID=3927
 
@@ -198,12 +210,41 @@ def extractResultDwellTime():
 
 
 def extractQueryDwellTime():
+    fout = open('../data/queryDwellTime.feature','w')
 
-    pass
+    for idx in range(0,len(LOGLIST),1):
+        l  = LOGLIST[idx]
+        if l.action=='BEGIN_SEARCH':
+            d = content2dict(l.content)
+            t0 = int(d['TIME'])
+            sid = l.studentid
+            tid = l.taskid
+            q = l.query
+            offset = 1
+            while True:
+                if idx + offset >=len(LOGLIST):
+                    t1 = int(content2dict(LOGLIST[idx+offset -1 ].content)['TIME'])
+                    fout.write(str(sid) + '\t'+str(tid)+'\t'+q.encode('utf8')+'\t'+str(t1-t0)+'\n')
+                    fout.close()
+                    return
+                else:
+                    if LOGLIST[idx+offset].action == 'QUERY_REFORM' or LOGLIST[idx+offset].action == 'OVER':
+                        t1 = int(content2dict(LOGLIST[idx+offset].content)['TIME'])
+                        fout.write(str(sid) + '\t'+str(tid)+'\t'+q.encode('utf8')+'\t'+str(t1-t0)+'\n')
+                        break
+                    else:
+                        pass
+
+                offset +=1
+    fout.close()
 
 
 # extractSessionDwellTime()
 # extractQueryDwellTime()
 # extractSessionClicks()
 # extractQueryClicks()
-extractFixation()
+# extractFixation()
+# extractResultDwellTime()
+# extractQueryDwellTime()
+
+# 
