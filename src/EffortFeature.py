@@ -246,5 +246,4 @@ def extractQueryDwellTime():
 # extractFixation()
 # extractResultDwellTime()
 # extractQueryDwellTime()
-
-# 
+#
