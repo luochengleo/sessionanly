@@ -174,11 +174,24 @@ def content2dict(s):
 
     return d
 
-def extractPageDwellTime():
-    for l in LOGLIST:
+
+def extractResultDwellTime():
+    for idx in len(0,len(LOGLIST),1):
+        l  = LOGLIST[idx]
         if l.action=='CLICK':
             d = content2dict(l.content)
+            t0 = d['TIME']
+            sid = l.studentid
+            tid = l.taskid
+            q = l.query
             
+            for offset in range(0,5,1):
+                if idx + offset >len(LOGLIST):
+                    break
+                else:
+                    if LOGLIST[idx+offset].action != 'JUMP_OUT' or LOGLIST[idx+offset] =='JUMP_IN':
+                        t1 = content2dict(LOGLIST[idx+offset].content)['TIME']
+
             #TIME=41906	USER=2014013436	TASK=1	QUERY=破冰游戏	ACTION=CLICK	INFO:	type=anchor	result=rb_0	page=1	rank=0	src=http://www.bdstar.org/Article/ShowArticle.asp?ArticleID=3927
 
 
