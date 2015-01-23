@@ -9,3 +9,6 @@ cu = cx.cursor()
 
 cu.execute('select * from anno_recordannotation')
 while True:
+    one  = cu.fetchone()
+    id = one[0]
+
