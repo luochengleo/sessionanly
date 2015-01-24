@@ -243,6 +243,8 @@ def extractQueryDwellTime():
 # extractQueryDwellTime()
 # extractSessionClicks()
 # extractQueryClicks()
+
+
 # extractFixation()
 # extractResultDwellTime()
 # extractQueryDwellTime()
