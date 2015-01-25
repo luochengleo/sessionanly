@@ -239,7 +239,7 @@ def extractQueryDwellTime():
     fout.close()
 
 
-# extractSessionDwellTime()
+extractSessionDwellTime()
 # extractQueryDwellTime()
 # extractSessionClicks()
 # extractQueryClicks()
