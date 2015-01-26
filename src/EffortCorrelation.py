@@ -28,8 +28,6 @@ def loadValidUsers():
         u.add(int(l.strip()))
     return u
 validUsers = loadValidUsers()
-for u in validUsers:
-    print u
 cx = sqlite3.connect("../data/db.sqlite3")
 cu = cx.cursor()
 
@@ -47,7 +45,7 @@ while True:
         score = int(logpiece[4])
         if studentID in validUsers:
             sid2tid2satlist[studentID][task_id].append(score)
-            print studentID,task_id,score
+            print 'Load Query Satisfaction',studentID,task_id,score
 
         else:
             print 'invalid studentID',studentID
@@ -63,7 +61,7 @@ while True:
         score = int(logpiece[3])
         if studentID in validUsers:
             sid2tid2ssat[studentID][task_id]=score
-            print studentID,task_id,score
+            print 'Load Session Satisfaction',studentID,task_id,score
         else:
             print 'invalid studentID',studentID
 
@@ -77,7 +75,19 @@ def personSpecific(sid):
         sessionseq.append(sid2tid2ssat[sid][tid])
     return mean(queryseq),variance(queryseq),mean(sessionseq),variance(sessionseq)
 
+# correlatin calculation
+
+result = open('../data/EffortCorrelation.csv','w')
+
+
+
+
+
 # correlation between session dwell time and satisfaction
+result.write('Correlation between Session Dwell time and Satisfaction\n')
+result.write('kappa,sign,kendalltau,sign\n')
+
+
 sessionDwellTime = list()
 sessionSatisfaction = list()
 sid2tid2sessionDwelltime= defaultdict(lambda:defaultdict(lambda:0.0))
@@ -91,5 +101,118 @@ for s in validUsers:
         _ssat = (_ssat-personSpecific(s)[2])/personSpecific(s)[3]
         sessionSatisfaction.append(_ssat)
 print 'Satisfaction(User) correlation with session Dwell time'
-print pearsonr(sessionDwellTime,sessionSatisfaction)
-print kendalltau(sessionDwellTime,sessionSatisfaction)
+
+p =  pearsonr(sessionDwellTime,sessionSatisfaction)
+k = kendalltau(sessionDwellTime,sessionSatisfaction)\
+
+result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
+
+######################################################################
+# correlation between (#clicks in a session )  and session satisfaction
+
+result.write('Correlation between #Clicks in session and Satisfaction\n')
+result.write('kappa,sign,kendalltau,sign\n')
+
+sessionClicks = list()
+sessionSatisfaction = list()
+
+sid2tid2sessionClicks = defaultdict(lambda:defaultdict(lambda:0))
+for l in open('../data/queryClicks.feature').readlines():
+    segs = l.strip().split('\t')
+    sid = int(segs[0])
+    tid = int(segs[1])
+    ck = int(segs[-1])
+    sid2tid2sessionClicks[sid][tid] += ck
+
+for s in validUsers:
+    for t in range(1,13,1):
+        sessionClicks.append(sid2tid2sessionClicks[s][t])
+        _ssat = sid2tid2ssat[s][t]
+        _ssat = (_ssat-personSpecific(s)[2])/personSpecific(s)[3]
+        sessionSatisfaction.append(_ssat)
+
+print 'Satisfaction(User) correlation with session clicks'
+
+p =  pearsonr(sessionClicks,sessionSatisfaction)
+k = kendalltau(sessionClicks,sessionSatisfaction)
+result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
+
+
+######################################################################
+# correlation between #queries  and session satisfaction
+result.write('Correlation between #Queries in session and Satisfaction\n')
+sessionQueryNum = list()
+sessionSatisfaction = list()
+sessionAvgQLength = list()
+sid2tid2queries = defaultdict(lambda:defaultdict(lambda:set()))
+
+cu.execute('select * from anno_log')
+while True:
+    one = cu.fetchone()
+    if one ==None:
+        break
+    else:
+        id = int(one[0])
+        sid = int(one[1])
+        tid = int(one[2])
+        query = one[4]
+        sid2tid2queries[sid][tid].add(query)
+
+for s in validUsers:
+    for t in range(1,13,1):
+        if len(sid2tid2queries[s][t]) ==0:
+            print s,t,len(sid2tid2queries[s][t])
+        sessionQueryNum.append(len(sid2tid2queries[s][t]))
+        sessionAvgQLength.append(mean([float(len(item)) for item in sid2tid2queries[s][t]]))
+
+        _ssat = sid2tid2ssat[s][t]
+        _ssat = (_ssat-personSpecific(s)[2])/personSpecific(s)[3]
+        sessionSatisfaction.append(_ssat)
+
+print 'Satisfaction(User) correlation with session query num'
+
+p =  pearsonr(sessionQueryNum,sessionSatisfaction)
+k = kendalltau(sessionQueryNum,sessionSatisfaction)
+result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
+
+# correlation between avg query length  and session satisfaction
+
+print 'Satisfaction(User) correlation with Average Query Length'
+
+result.write('Correlation between Average Query Length in session and Satisfaction\n')
+p =  pearsonr(sessionAvgQLength,sessionSatisfaction)
+k = kendalltau(sessionAvgQLength,sessionSatisfaction)
+result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
+
+# correlation between avg query and session satisfaction
+
+print 'Satisfaction(User) correlation with Average Query Length'
+
+result.write('Correlation between Average Query Length in session and Satisfaction\n')
+p =  pearsonr(sessionAvgQLength,sessionSatisfaction)
+k = kendalltau(sessionAvgQLength,sessionSatisfaction)
+result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
+
+# correlation between Average Clicks per query and session Satisfaction
+print 'Satisfaction(User) correlation with #clicks per query in session'
+
+sessionAvgClickPerQuery = list()
+for i in range(0,len(sessionClicks),1):
+    sessionAvgClickPerQuery.append(float(sessionClicks[i])/float(sessionQueryNum[i]))
+
+result.write('Correlation between Average #clicks per query in session and Satisfaction\n')
+p =  pearsonr(sessionAvgClickPerQuery,sessionSatisfaction)
+k = kendalltau(sessionAvgClickPerQuery,sessionSatisfaction)
+result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
+
+#Correlation between click position(Average, Max, Min) and session Satisfaction
+
+sid2tid2q2clickPosition = defaultdict(lambda:defaultdict(lambda:list()))
+
+cu.execute()
+
+
+
+
+result.close()
+
