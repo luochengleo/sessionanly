@@ -211,10 +211,16 @@ sessionAvgClickPerQuery = list()
 for i in range(0,len(sessionClicks),1):
     sessionAvgClickPerQuery.append(float(sessionClicks[i])/float(sessionQueryNum[i]))
 
-result.write('Correlation between Average #clicks per query in session and Satisfaction\n')
-p =  pearsonr(sessionAvgClickPerQuery,sessionSatisfaction)
-k = kendalltau(sessionAvgClickPerQuery,sessionSatisfaction)
-result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
+print len(sessionAvgClickPerQuery),len(sessionSatisfaction)
+debug = open('../data/debug.txt','w')
+for idx in range(0,348,1):
+    debug.write(str(sessionAvgClickPerQuery[idx])+','+str(sessionSatisfaction[idx])+'\n')
+debug.close()
+
+# result.write('Correlation between Average #clicks per query in session and Satisfaction\n')
+# p =  pearsonr(sessionAvgClickPerQuery,sessionSatisfaction)
+# k = kendalltau(sessionAvgClickPerQuery,sessionSatisfaction)
+# result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
 
 #Correlation between click position(Average, Max, Min) and session Satisfaction
 sid2tid2q2clickPosition = defaultdict(lambda:defaultdict(lambda:defaultdict(lambda:list())))
@@ -259,7 +265,6 @@ for s in validUsers:
         sessionSatisfaction.append(_ssat)
 
 result.write('Correlation between Max/Avg/Mean click position in session and Satisfaction\n')
-
 p =  pearsonr(sessionMaxPosition,sessionSatisfaction)
 k = kendalltau(sessionMaxPosition,sessionSatisfaction)
 result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
@@ -274,8 +279,78 @@ k = kendalltau(sessionMinPosition,sessionSatisfaction)
 result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
 
 
-
 # Correlation between Fixation Time/#Fixations 
+
+# Correlation between Fixation Distance(Max, Min, Average) with session Distance
+sid2tid2qfixPosition = defaultdict(lambda:defaultdict(lambda:defaultdict(lambda:list())))
+sid2tid2fixNum = defaultdict(lambda:defaultdict(lambda:0))
+sid2tid2fixDurSum = defaultdict(lambda:defaultdict(lambda:0))
+for l in open('../data/fixitionOnResult.feature.temp').readlines()[1:]:
+    segs = l.strip().split('\t')
+    sid = int(segs[0])
+    tid = int(segs[1])
+    q = segs[2]
+    p = int(segs[3])
+    d = int(segs[7])
+    r = int(segs[10])
+    sid2tid2qfixPosition[sid][tid][q].append((p-1)*10+r)
+    sid2tid2fixNum[sid][tid]+=1
+    sid2tid2fixDurSum[sid][tid]+=d
+
+sessionFixNum = list()
+sessionFixDurSum = list()
+sessionAvgFixDist = list()
+sessionMaxFixDist = list()
+sessionMinFixDist = list()
+for s in validUsers:
+    for t in range(1,13,1):
+        _flist = []
+        for _q in sid2tid2qfixPosition[s][t].keys():
+            _flist.extend(sid2tid2qfixPosition[s][t][_q])
+        sessionFixNum.append(sid2tid2fixNum[s][t])
+        sessionFixDurSum.append(sid2tid2fixDurSum[s][t])
+        sessionAvgFixDist.append(mean(_flist))
+        sessionMaxFixDist.append(max(_flist))
+        sessionMinFixDist.append(min(_flist))
+
+result.write('Correlation between Deepest Fixation and Satisfaction\n')
+p =  pearsonr(sessionMaxFixDist,sessionSatisfaction)
+k = kendalltau(sessionMaxFixDist,sessionSatisfaction)
+result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
+
+result.write('Correlation between Average Fixation Depth and Satisfaction\n')
+p =  pearsonr(sessionAvgFixDist,sessionSatisfaction)
+k = kendalltau(sessionAvgFixDist,sessionSatisfaction)
+result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
+print 'hello world 2'
+
+print len(sessionMinFixDist),len(sessionSatisfaction)
+for i in range(0,348,1):
+    print sessionMinFixDist[i],sessionSatisfaction[i]
+result.write('Correlation between Minimal Fixation Depth and Satisfaction\n')
+p =  pearsonr(sessionMinFixDist,sessionSatisfaction)
+k = kendalltau(sessionMinFixDist,sessionSatisfaction)
+result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
+
+print 'hello world 3'
+result.write('Correlation between Fixation Duration and Satisfaction\n')
+p =  pearsonr(sessionFixDurSum,sessionSatisfaction)
+k = kendalltau(sessionFixDurSum,sessionSatisfaction)
+result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
+
+result.write('Correlation between #Fixations and Satisfaction\n')
+p =  pearsonr(sessionFixNum,sessionSatisfaction)
+k = kendalltau(sessionFixNum,sessionSatisfaction)
+result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
+
+result.write('Correlation between Sum of Fixation Time and Satisfaction\n')
+p =  pearsonr(sessionFixDurSum,sessionSatisfaction)
+k = kendalltau(sessionFixDurSum,sessionSatisfaction)
+result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
+
+
+
+
 
 result.close()
 
