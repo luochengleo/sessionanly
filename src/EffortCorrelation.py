@@ -19,6 +19,17 @@ def variance(lt):
         d += (float(item)-m)**2
     return (d/max(1.0,float(len(lt))))**0.5
 
+def content2dict(s):
+    d = dict()
+    for seg in s.split('\t'):
+        kvs = seg.split('=')
+        if len(kvs) ==2:
+            d[kvs[0]] = kvs[1]
+        else:
+            d[kvs[0]] = ''
+
+    return d
+
 
 sid2tid2satlist = defaultdict(lambda:defaultdict(lambda:list()))
 sid2tid2ssat = defaultdict(lambda:defaultdict(lambda:1))
@@ -206,13 +217,65 @@ k = kendalltau(sessionAvgClickPerQuery,sessionSatisfaction)
 result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
 
 #Correlation between click position(Average, Max, Min) and session Satisfaction
+sid2tid2q2clickPosition = defaultdict(lambda:defaultdict(lambda:defaultdict(lambda:list())))
 
-sid2tid2q2clickPosition = defaultdict(lambda:defaultdict(lambda:list()))
+# TIME=5112	USER=2014013436	TASK=1	QUERY=破冰游戏	ACTION=CLICK	INFO:	type=anchor	result=rb_1	page=1	rank=1	src=http://www.tuozhanyouxi.com/pobing/
+cu.execute('select * from anno_log')
+while True:
+    one = cu.fetchone()
+    if one !=None:
+        id = int(one[0])
+        sid = int(one[1])
+        tid = int(one[2])
 
-cu.execute()
+        action = one[3]
+        if action =='CLICK':
+            query = one[4]
+            content = one[5]
+            d = content2dict(content)
+            p = int(d[u'page'])
+            r = int(d[u'rank'])
+            sid2tid2q2clickPosition[sid][tid][query].append((p-1)*10+r)
+    else:
+        break
+
+
+sessionMaxPosition = list()
+sessionMinPosition = list()
+sessionAvgPosition = list()
+sessionSatisfaction = list()
+
+for s in validUsers:
+    for t in range(1,13,1):
+        jlist = []
+        for _q in sid2tid2q2clickPosition[s][t].keys():
+            jlist.extend(sid2tid2q2clickPosition[s][t][_q])
+
+        sessionMaxPosition.append(max(jlist))
+        sessionAvgPosition.append(mean(jlist))
+        sessionMinPosition.append(min(jlist))
+        _ssat = sid2tid2ssat[s][t]
+        _ssat = (_ssat-personSpecific(s)[2])/personSpecific(s)[3]
+        sessionSatisfaction.append(_ssat)
+
+result.write('Correlation between Max/Avg/Mean click position in session and Satisfaction\n')
+
+p =  pearsonr(sessionMaxPosition,sessionSatisfaction)
+k = kendalltau(sessionMaxPosition,sessionSatisfaction)
+result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
+
+
+p =  pearsonr(sessionAvgPosition,sessionSatisfaction)
+k = kendalltau(sessionAvgPosition,sessionSatisfaction)
+result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
+
+p =  pearsonr(sessionMinPosition,sessionSatisfaction)
+k = kendalltau(sessionMinPosition,sessionSatisfaction)
+result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
 
 
 
+# Correlation between Fixation Time/#Fixations 
 
 result.close()
 
