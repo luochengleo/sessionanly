@@ -35,7 +35,7 @@ while True:
             score =1
         print float(score)
         sid2tid2annotaion[studentid][taskid][annotator] = math.log10(float(score))
-        aid2sum[annotator]+= math.log(float(score))
+        aid2sum[annotator]+= math.log10(float(score))
 
 
 aid2mean = defaultdict(lambda:0.0)
@@ -53,8 +53,7 @@ for s in sid2tid2annotaion.keys():
         if len(sid2tid2annotaion[s][t].keys())!=3:
             print s,t,sid2tid2annotaion[s][t]
         for a in sid2tid2annotaion[s][t].keys():
-            # fout.write(str(s)+'\t'+str(t)+'\t'+str(a)+'\t'+str(gloablmean)+'\t'+str(aid2mean[a])+'\t'+str(sid2tid2annotaion[s][t][a])+'\t'+str((sid2tid2annotaion[s][t][a]+gloablmean-aid2mean[a]))+'\t'+str(10**(sid2tid2annotaion[s][t][a]+gloablmean-aid2mean[a]))+'\n')
-            fout.write(str(s)+'\t'+str(t)+'\t'+str(a)+'\t'+str(10**(sid2tid2annotaion[s][t][a]+gloablmean-aid2mean[a]))+'\n')
+            fout.write(str(s)+'\t'+str(t)+'\t'+str(a)+'\t'+str(gloablmean)+'\t'+str(aid2mean[a])+'\t'+str(sid2tid2annotaion[s][t][a])+'\t'+str(10**(sid2tid2annotaion[s][t][a]+gloablmean-aid2mean[a]))+'\n')
             sid2tid2normanno[s][t][a] = 10**(sid2tid2annotaion[s][t][a]+gloablmean-aid2mean[a])
 fout.close()
 
@@ -71,7 +70,7 @@ from scipy.stats.stats import kendalltau
 annotators = list(aid2annotations.keys())
 from  itertools import permutations
 for i in permutations(annotators,2):
-    print i,pearsonr(aid2annotations[i[0]],aid2annotations[i[1]])[0],kendalltau(aid2annotations[i[0]],aid2annotations[i[1]])[0]
+    print i[0],i[1],pearsonr(aid2annotations[i[0]],aid2annotations[i[1]])[0],kendalltau(aid2annotations[i[0]],aid2annotations[i[1]])[0]
 
 
 

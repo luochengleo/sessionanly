@@ -211,16 +211,17 @@ sessionAvgClickPerQuery = list()
 for i in range(0,len(sessionClicks),1):
     sessionAvgClickPerQuery.append(float(sessionClicks[i])/float(sessionQueryNum[i]))
 
+
 print len(sessionAvgClickPerQuery),len(sessionSatisfaction)
 debug = open('../data/debug.txt','w')
 for idx in range(0,348,1):
     debug.write(str(sessionAvgClickPerQuery[idx])+','+str(sessionSatisfaction[idx])+'\n')
 debug.close()
 
-# result.write('Correlation between Average #clicks per query in session and Satisfaction\n')
-# p =  pearsonr(sessionAvgClickPerQuery,sessionSatisfaction)
-# k = kendalltau(sessionAvgClickPerQuery,sessionSatisfaction)
-# result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
+result.write('Correlation between Average #clicks per query in session and Satisfaction\n')
+p =  pearsonr(sessionAvgClickPerQuery,sessionSatisfaction)
+k = kendalltau(sessionAvgClickPerQuery,sessionSatisfaction)
+result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
 
 #Correlation between click position(Average, Max, Min) and session Satisfaction
 sid2tid2q2clickPosition = defaultdict(lambda:defaultdict(lambda:defaultdict(lambda:list())))
@@ -332,7 +333,6 @@ p =  pearsonr(sessionMinFixDist,sessionSatisfaction)
 k = kendalltau(sessionMinFixDist,sessionSatisfaction)
 result.write(','.join([str(p[0]),str(p[1]),str(k[0]),str(k[1])])+'\n')
 
-print 'hello world 3'
 result.write('Correlation between Fixation Duration and Satisfaction\n')
 p =  pearsonr(sessionFixDurSum,sessionSatisfaction)
 k = kendalltau(sessionFixDurSum,sessionSatisfaction)
